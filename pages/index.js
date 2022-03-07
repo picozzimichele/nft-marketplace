@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ethers } from "ethers"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -26,6 +27,7 @@ export default function Home() {
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
     // get the data
     const data = await marketContract.fetchMarketItems()
+    console.log("data", data)
     // map over all the items
     const items = await Promise.all(data.map(async i => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
@@ -82,7 +84,7 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {nfts.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <img src={ntf.image} />
+                <img src={nft.image} alt="NFT"/>
                 <div className="p-4">
                   <p className="h-[64px] text-2xl font-semibold">{nft.name}</p>
                   <div className="h-[70px] overflow-hidden">

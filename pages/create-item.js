@@ -4,7 +4,6 @@ import { ethers } from "ethers";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { useRouter } from "next/dist/client/router";
 import Web3Modal from "web3modal";
-import Image from "next/image"
 // pinning servide to be used with ipfs
 const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0")
 
@@ -40,10 +39,10 @@ export default function CreateItem () {
     async function createItem() {
         const { name, description, price } = formInput
         // check if all is ok
-        if(!name || !description || !price || !fileUri) return
+        if(!name || !description || !price || !fileUrl) return
         // stringify the data
         const data = JSON.stringify({
-            name, description, image: fileUri
+            name, description, image: fileUrl
         })
         // save the data to ipfs network
         try {
